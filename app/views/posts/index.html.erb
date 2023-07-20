@@ -1,0 +1,20 @@
+<% if @posts.any? %>
+  <% for post in @posts %>
+    <%= post.title %> <% if signed_in? %> - <%= post.user.email %> <% end %>
+    <br />
+    <%= post.body %>
+  <% end %>
+
+<% else %>
+  <p>No posts in club, be the first!</p>
+<% end %>
+
+<br />
+<%= link_to "New", new_post_path %>
+<br />
+
+<% if signed_in? %>
+  <%= button_to "Sign Out", destroy_user_session_path, method: :delete %>
+<% else %>
+  <%= link_to "Sign In", new_user_session_path %>
+<% end %>
